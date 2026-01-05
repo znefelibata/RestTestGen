@@ -23,7 +23,7 @@ public class GenericParameter extends LeafParameter {
 
     @Override
     public ParameterType getType() {
-        return ParameterType.UNKNOWN;
+        return ParameterType.STRING;
     }
 
     @Override

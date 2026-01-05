@@ -64,6 +64,13 @@ public class ExtendedRandom extends Random {
      * @param minLength minimum length, null = 0
      * @param maxLength maximum length, if null no maximum value is used
       @return an integer value among minLength (or 0 if null) and maxLength, or without bound if maxLength == null
+      与 `nextLength()` 相同，但返回更小的值。
+
+       * @param minLength 最小长度，null = 0
+
+     * @param maxLength 最大长度，如果为 null，则不使用最大值
+
+     @return 一个介于 minLength（如果为 null 则为 0）和 maxLength 之间的整数值，如果 maxLength == null，则返回无界值。
      */
     public int nextShortLength(Integer minLength, Integer maxLength) {
         if (maxLength != null && maxLength == 0) {
@@ -77,9 +84,12 @@ public class ExtendedRandom extends Random {
         if (minLength.equals(maxLength)) {
             return minLength;
         }
-
-        if (minLength == 0 && nextInt(0, 100) < 70) {
-            return 1;
+        // 没有传入的情况下，以百分之90的概率返回长度为2
+//        if (minLength == 0 && nextInt(0, 100) < 90) {
+//            return 2;
+//        }
+        if (minLength == 0) {
+            return 2;
         }
 
         int length = (int) Math.abs(this.nextGaussian() * 2) + minLength;

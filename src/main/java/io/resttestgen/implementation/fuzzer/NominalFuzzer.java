@@ -4,6 +4,7 @@ import io.resttestgen.core.Environment;
 import io.resttestgen.core.datatype.parameter.Parameter;
 import io.resttestgen.core.datatype.parameter.leaves.LeafParameter;
 import io.resttestgen.core.datatype.parameter.structured.ArrayParameter;
+import io.resttestgen.core.datatype.parameter.structured.ObjectParameter;
 import io.resttestgen.core.helper.ExtendedRandom;
 import io.resttestgen.core.openapi.Operation;
 import io.resttestgen.core.testing.Fuzzer;
@@ -37,7 +38,7 @@ public class NominalFuzzer extends Fuzzer {
     private ParameterValueProvider parameterValueProvider = ParameterValueProviderCachedFactory.getParameterValueProvider(ParameterValueProviderType.ENUM_AND_EXAMPLE_PRIORITY);
     private boolean strict = false;
 
-    public final int PROBABILITY_TO_KEEP_A_NON_REQUIRED_LEAF = 10;
+    public final int PROBABILITY_TO_KEEP_A_NON_REQUIRED_LEAF = 30;
     
     public NominalFuzzer(Operation operation) {
         this.operation = operation;
@@ -137,12 +138,16 @@ public class NominalFuzzer extends Fuzzer {
         LinkedList<ArrayParameter> queue = new LinkedList<>(arrays);
         while (!queue.isEmpty()) {
             ArrayParameter array = queue.getFirst();
+            //确定数组的长度
             int n = random.nextShortLength(array.getMinItems(), array.getMaxItems());
 
             // If not required, remove array with a 0.7 probability
-            if (!array.isRequired() && random.nextInt(10) < 8) {
-                n = 0;
-            }
+            /**
+            有40%的概率不会生成element，那么Array也就没有值
+             */
+//            if (!array.isRequired() && random.nextInt(10) < 4) {
+//                n = 0;
+//            }
 
             for (int i = 0; i < n; i++) {
                 Parameter referenceElementCopy = array.getReferenceElement().deepClone();
@@ -162,10 +167,11 @@ public class NominalFuzzer extends Fuzzer {
         Collection<LeafParameter> leaves = editableOperation.getLeaves();
         for (LeafParameter leaf : leaves) {
 
-            // If parameter is not mandatory or if it is not part of an array, set value with 25% probability
+            // If parameter is not mandatory or if it is not part of an array, set value with 75% probability
             // Null parameters will be removed by the request manager
             if (leaf.isRequired() || random.nextInt(100) < PROBABILITY_TO_KEEP_A_NON_REQUIRED_LEAF ||
-                    (leaf.getParent() != null && leaf.getParent() instanceof ArrayParameter)) {
+                    (leaf.getParent() != null && (leaf.getParent() instanceof ArrayParameter)) ||
+                    (leaf.getTableName() != null && leaf.getParent() != null && (leaf.getParent() instanceof ObjectParameter))) {
                 leaf.setValueWithProvider(parameterValueProvider);
             }
         }

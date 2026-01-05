@@ -1,2 +1,2 @@
-apiUnderTest: bookstore
-strategyClassName: NominalAndErrorStrategy
+apiUnderTest: gitlab
+strategyClassName: SqlDiffStrategy

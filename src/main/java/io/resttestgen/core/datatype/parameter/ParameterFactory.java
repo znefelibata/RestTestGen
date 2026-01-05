@@ -62,7 +62,8 @@ public class ParameterFactory {
                 logger.warn("Unsupported type '" + elementMap.get("type") + "' for parameter " +
                         name + ". Created a generic parameter.");
                 try {
-                    return new GenericParameter(elementMap, name);
+//                    return new GenericParameter(elementMap, name);
+                    return new StringParameter(elementMap, name);
                 } catch (ClassCastException e) {
                     throw new ParameterCreationException("Unable to create generic parameter");
                 }

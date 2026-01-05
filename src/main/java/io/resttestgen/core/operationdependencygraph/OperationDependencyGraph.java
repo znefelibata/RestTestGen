@@ -19,10 +19,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -70,6 +67,45 @@ public class OperationDependencyGraph {
 
     public void increaseOperationTestingAttempts(Operation operation) {
         getNodeFromOperation(operation).increaseTestingAttempts();
+    }
+
+    public OperationNode findBestDfsStartNode(List<OperationNode> postNodes) {
+        // 1. 判空处理
+        if (postNodes == null || postNodes.isEmpty()) {
+            return null;
+        }
+
+        OperationNode bestNode = null;
+        int minInDegree = Integer.MAX_VALUE;
+        int maxOutDegree = Integer.MIN_VALUE;
+
+        // 2. 只遍历 postNodes 列表中的候选人
+        for (OperationNode node : postNodes) {
+
+            // 【重要安全检查】确保该节点确实存在于图中
+            // 如果列表中有个节点没被加到图里，调用 inDegreeOf 会抛异常 IllegalArgumentException
+            if (!graph.containsVertex(node)) {
+                continue;
+            }
+
+            // 3. 获取度数（计算的是它在整个大图中的依赖关系）
+            int inDegree = graph.inDegreeOf(node);
+            int outDegree = graph.outDegreeOf(node);
+
+            // 4. 筛选逻辑：入度最小 -> 出度最大
+            if (inDegree < minInDegree) {
+                minInDegree = inDegree;
+                maxOutDegree = outDegree;
+                bestNode = node;
+            } else if (inDegree == minInDegree) {
+                if (outDegree > maxOutDegree) {
+                    maxOutDegree = outDegree;
+                    bestNode = node;
+                }
+            }
+        }
+
+        return bestNode;
     }
 
 

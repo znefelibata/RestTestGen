@@ -73,6 +73,7 @@ public class TestSequence extends Taggable implements List<TestInteraction> {
 
     @NotNull
     @Override
+    //遍历testInteractions
     public Iterator<TestInteraction> iterator() {
         return testInteractions.iterator();
     }
@@ -128,7 +129,7 @@ public class TestSequence extends Taggable implements List<TestInteraction> {
     public void clear() {
 
     }
-
+    //获取第一个testInteraction也是唯一一个
     public TestInteraction getFirst() {
         return testInteractions.get(0);
     }

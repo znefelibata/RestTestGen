@@ -10,6 +10,7 @@ public class RandomOperationsSorter extends StaticOperationsSorter {
 
     public RandomOperationsSorter() {
         queue = new LinkedList<>(Environment.getInstance().getOpenAPI().getOperations());
+        //shuffle 函数将操作随机打乱
         Collections.shuffle(queue);
     }
 }

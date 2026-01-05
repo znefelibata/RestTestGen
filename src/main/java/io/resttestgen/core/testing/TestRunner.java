@@ -141,6 +141,7 @@ public class TestRunner {
             executeTestInteraction(testInteraction);
 
             // Only if the interaction is executed successfully and status code 429 is set as invalid status code
+            //仅当交互执行成功且状态码 429 设置为无效状态码时
             if (testInteraction.getTestStatus() == TestStatus.EXECUTED &&
                     invalidStatusCodes.contains(new HttpStatusCode(429))) {
 

@@ -423,7 +423,7 @@ public class Operation {
     public List<Set<ParameterName>> getZeroOrOne() {
         return zeroOrOne;
     }
-
+    //true和false的区别是能否获取到数组参数的ReferenceLeaves
     public Collection<LeafParameter> getLeaves() {
         return getVisitResult(new LeavesVisitor());
     }

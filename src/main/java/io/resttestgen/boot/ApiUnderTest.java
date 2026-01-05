@@ -2,6 +2,8 @@ package io.resttestgen.boot;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import io.resttestgen.core.datatype.ParameterName;
+import io.resttestgen.core.datatype.parameter.attributes.ParameterLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.yaml.snakeyaml.Yaml;
@@ -116,9 +118,17 @@ public class ApiUnderTest {
         }
         if (apiConfigMap.get("authenticationCommands") != null) {
             this.authenticationCommands = (LinkedHashMap<String, String>) apiConfigMap.get("authenticationCommands");
-            for (String description : this.authenticationCommands.keySet()) {
-                this.authenticationInfoMap.put(description, new AuthenticationInfo(description, this.authenticationCommands.get(description)));
-            }
+//            for (String description : this.authenticationCommands.keySet()) {
+//                this.authenticationInfoMap.put(description, new AuthenticationInfo(description, this.authenticationCommands.get(description)));
+//            }
+            String description = authenticationCommands.get("name");
+            String parameterName = authenticationCommands.get("name");
+            String value = authenticationCommands.get("value");
+            String in = authenticationCommands.get("in");
+            String duration = authenticationCommands.get("duration");
+            this.authenticationInfoMap.put(description, new AuthenticationInfo(description,
+                    new ParameterName(parameterName), value, ParameterLocation.getLocationFromString(in),
+                    Long.parseLong(duration)));
         }
         if (apiConfigMap.get("resetCommand") != null) {
             setResetCommand(apiConfigMap.get("resetCommand").toString());

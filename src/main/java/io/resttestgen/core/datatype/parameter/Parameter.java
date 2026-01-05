@@ -48,6 +48,16 @@ public abstract class Parameter extends Taggable {
     private Operation operation; // Operation to which the parameter is associated
     private Parameter parent; // Reference to the parent Parameter if any; else null
 
+    private String tableName;
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
     private static final String castedWarn = "' was not compliant to parameter type, but it has been " +
             "cast to fit the right type.";
     private static final String discardedWarn = "' is not compliant to parameter type. The value will be discarded.";
@@ -164,7 +174,7 @@ public abstract class Parameter extends Taggable {
         style = other.style;
         explode = other.explode;
         type = other.type;
-
+        tableName = other.tableName;
         description = other.description;
 
         defaultValue = ObjectHelper.deepCloneObject(other.defaultValue);

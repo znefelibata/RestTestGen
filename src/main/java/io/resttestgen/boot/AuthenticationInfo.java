@@ -32,6 +32,14 @@ public class AuthenticationInfo {
         this.command = command;
     }
 
+    public AuthenticationInfo(String description, ParameterName parameterName, String value, ParameterLocation in, Long duration) {
+        this.description = description;
+        this.parameterName = parameterName;
+        this.value = value;
+        this.in = in;
+        this.duration = duration;
+    }
+
     /**
      * Performs authentication by running the authentication script.
      * @return true if the authentication succeeded, false otherwise.

@@ -19,6 +19,10 @@ public abstract class OperationsSorter {
         return queue.getFirst();
     }
 
+    public LinkedList<Operation> getQueue() {
+        return queue;
+    }
+
     public Operation removeFirst() {
         return queue.remove(0);
     }

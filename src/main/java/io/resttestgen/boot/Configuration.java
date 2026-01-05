@@ -39,7 +39,7 @@ public class Configuration {
 
         logVerbosity = Level.INFO;
 
-        apiUnderTest = "bookstore";
+        apiUnderTest = "gitlab";
 
         // Choose random testing session name with date and random number
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
@@ -49,7 +49,7 @@ public class Configuration {
         // Use local path (API path) by default
         globalOutputPath = false;
 
-        strategyClassName = "NominalAndErrorStrategy";
+        strategyClassName = "SqlDiffStrategy";
 
         odgFileName = "odg.dot";
 
