@@ -3,8 +3,8 @@ plugins {
     id 'application'
 }
 
-group 'io.resttestgen'
-version '24.03'
+group 'io.restsqldiff'
+version '1.0.0'
 
 application {
     mainClass.set('io.resttestgen.boot.cli.App')

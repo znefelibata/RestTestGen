@@ -1,8 +1,12 @@
-<img alt="RestTestGen's Logo" src="https://static.corradinidavi.de/img/rtg/rtg-logo-light.svg" style="width: 500px;"/>
+<img alt="RestSqlDiff's Logo" src="https://static.corradinidavi.de/img/rtg/rtg-logo-light.svg" style="width: 500px;"/>
 
-# RestTestGen: a tool and framework for automated black-box testing of RESTful APIs.
+# RestSqlDiff: Differential Testing between MySQL Models and RESTful APIs
 
-> **Citing our work:** bibtex entries for our papers are available in the [CITE.md](CITE.md) file.
+> **Note:** This project is forked from [RestTestGen](https://github.com/SeUniVr/RestTestGen) and specialized for differential testing.
+
+RestSqlDiff is a tool designed to perform differential testing by comparing the behavior of a RESTful API against a local MySQL model. It helps in identifying discrepancies and potential bugs by verifying if the API implementation aligns with the expected database state changes.
+
+## Original RestTestGen Description
 
 RestTestGen is a robust tool and framework designed for automated black-box testing of RESTful web APIs. As a testing tool, it incorporates various testing strategies that prove valuable in identifying bugs and vulnerabilities within the API being tested. Operating exclusively as a black-box end-to-end testing tool, it interacts with the API solely through HTTP, without necessitating access to the source code. The only requirement is an OpenAPI specification of the API being tested.
 
