@@ -1,5 +1,3 @@
-<img alt="RestSqlDiff's Logo" src="https://static.corradinidavi.de/img/rtg/rtg-logo-light.svg" style="width: 500px;"/>
-
 # RestSqlDiff: Differential Testing between MySQL Models and RESTful APIs
 
 > **Note:** This project is forked from [RestTestGen](https://github.com/SeUniVr/RestTestGen) and specialized for differential testing.
