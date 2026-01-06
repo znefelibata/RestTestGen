@@ -17,8 +17,8 @@ import java.io.IOException;
 public class App {
 
     private static final Logger logger = LogManager.getLogger(App.class);
-    private static final String toolVersion = "24.03";
-    private static final String messageHeader = "RestTestGen CLI " + toolVersion;
+    private static final String toolVersion = "1.0.0";
+    private static final String messageHeader = "RestSqlDiff CLI " + toolVersion;
     private static final String helpMessage = messageHeader + "\n"
             + "Arguments:\n"
             + "   (OPTIONAL)  -a  API under test. Default: Book Store.\n"
